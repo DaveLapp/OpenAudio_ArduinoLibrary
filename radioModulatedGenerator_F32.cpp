@@ -33,9 +33,6 @@ void radioModulatedGenerator_F32::update(void) {
   uint16_t index, i;
   float32_t a, b, deltaPhase, phaseC, amSig;
 
-
- uint32_t tt=micros();
-
   // Input 0 is for amplitude modulation.
   if(doAM) {
     inAmpl = AudioStream_F32::receiveReadOnly_f32(0);
@@ -72,7 +69,7 @@ void radioModulatedGenerator_F32::update(void) {
      if(doPM)  // Phase in inPhaseFreq->data[i] is scaled for (0.0, 2*PI)
         phaseS += (phaseIncrement0 + K512ON2PI*inPhaseFreq->data[i]);
      else if(doFM)
-        phaseS += kp*(freq + inPhaseFreq->data[i]);  //  kp=512.0/sample_rate_Hz
+        phaseS += kp*(freq + deviationFMScale*inPhaseFreq->data[i]);  //  kp=512.0/sample_rate_Hz
      else
         phaseS += phaseIncrement0;  // No PM or FM alteration to carrier phase
 
@@ -120,5 +117,4 @@ void radioModulatedGenerator_F32::update(void) {
       AudioStream_F32::transmit(outBlockQ, 1);
       AudioStream_F32::release (outBlockQ);
    }
-Serial.println(micros() - tt);
 }
