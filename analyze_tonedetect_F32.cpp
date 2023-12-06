@@ -1,7 +1,11 @@
 /*
  * analyze_tonedetect_F32.cpp  Converted to float from PJRC Teensy Audio Library
+ * for the OpenAudio_TeensyArduino library (floating point audio).
  *   MIT License on changed portions
  *   Bob Larkin March 2021
+ *
+ * See also  analyze_CTCSS_F32  that is specific for the CTCSS tone system
+ * with tones in the 67.0 to 250.3 Hz range.  (In this same library)
  *
  * Audio Library for Teensy 3.X
  * Copyright (c) 2014, Paul Stoffregen, paul@pjrc.com
@@ -95,7 +99,7 @@ float AudioAnalyzeToneDetect_F32::read(void)  {
     len = length;
     __enable_irq();
     power = q1*q1 + q2*q2 - q1*q2*coef;
-    return 2.0f*sqrtf(power)/(float)len; // Scale to (0.0, 1.0)
+    return 2.0f*gain*sqrtf(power)/(float)len; // Scaled to gain*(0.0, 1.0)
     }
 
 AudioAnalyzeToneDetect_F32::operator bool()  {
@@ -108,7 +112,7 @@ AudioAnalyzeToneDetect_F32::operator bool()  {
     q2 = out2;
     len = length;
     __enable_irq();
-
+    power = gain*gain*(q1*q1 + q2*q2 - q1*q2*coef);
     trigger = (float)len * thresh;
     trigger *= trigger;
     //Serial.println("bool: power, trigger = "); Serial.print(power, 6); Serial.print(", "); Serial.println(trigger, 6);

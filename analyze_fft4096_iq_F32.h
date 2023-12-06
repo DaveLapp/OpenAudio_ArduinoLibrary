@@ -73,11 +73,13 @@
  *   If xAxis=0  f=fs/2 in middle, f=0 on right edge
  *   If xAxis=1  f=fs/2 in middle, f=0 on left edge
  *   If xAxis=2  f=fs/2 on left edge, f=0 in middle
- *   If xAxis=3  f=fs/2 on right edgr, f=0 in middle
+ *   If xAxis=3  f=fs/2 on right edge, f=0 in middle
  * If there is 180 degree phase shift to I or Q these all get reversed.
  *
  * Timing, max is longest update() time:
- *   T4.0 Windowed, dBFS Out, 987 uSec
+ *   T4.0 Windowed, dBFS Out, 701 uSec
+ * Averaged over all updates this is 4.3% processor load
+ * or less, depending on averaging.
  *
  * Scaling:
  *   Full scale for floating point DSP is a nebulous concept.  Normally the
@@ -90,6 +92,7 @@
  *   no matter how it is scaled, but this factor needs to be considered
  *   when building the INO.
  */
+ // Corrected sumsq[] array size.  RSL 31 Dec 2022
 
 #ifndef analyze_fft4096iq_h_
 #define analyze_fft4096iq_h_
@@ -235,7 +238,8 @@ private:
   float window[4096];
   float *pWin = window;
   float fft_buffer[8192];
-  float sumsq[8192];  // Avoid re-use of output[]
+// Was  float sumsq[8192];  // Avoid re-use of output[]
+  float sumsq[4096];    // 31 Dec 2022
   uint8_t state = 0;
   bool outputflag = false;
   audio_block_f32_t *inputQueueArray[2];

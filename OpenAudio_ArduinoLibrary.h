@@ -1,4 +1,5 @@
 
+#include <AudioAlignLR_F32.h>
 #include <AudioStream_F32.h>
 #include <AudioControlSGTL5000_Extended.h>
 #include <control_tlv320aic3206.h>
@@ -13,13 +14,25 @@
 #include "AudioEffectEmpty_F32.h"
 #include "AudioEffectGain_F32.h"
 #include "AudioFilterBiquad_F32.h"
+#include "AudioFilterConvolution_F32.h"
 #include <AudioFilterFIR_F32.h>
 #include <AudioFilterIIR_F32.h>
+#include "AudioLMSDenoiseNotch_F32.h"
+#include "AudioMathAdd_F32.h"
+#include "AudioMathConstant_F32.h"
+#include "AudioMathMultiply_F32.h"
+#include "AudioMathOffset_F32.h"
+#include "AudioMathScale_F32.h"
 #include "AudioMixer_F32.h"
 #include "AudioMultiply_F32.h"
+#include "AudioSDPlayer_F32.h"
 #include "AudioSettings_F32.h"
+#include "AudioSpectralDenoise_F32.h"
 #include "input_i2s_f32.h"
+#include "input_spdif3_f32.h"
+#include "async_input_spdif3_F32.h"
 #include "output_i2s_f32.h"
+#include "output_spdif3_f32.h"
 #include "play_queue_f32.h"
 #include "record_queue_f32.h"
 #include "synth_pinknoise_f32.h"
@@ -33,6 +46,7 @@
 #include "analyze_fft1024_iq_F32.h"
 #include "analyze_fft2048_iq_F32.h"
 #include "analyze_fft4096_iq_F32.h"
+#include "analyze_fft4096_iqem_F32.h"
 #include "analyze_peak_f32.h"
 #include "analyze_rms_f32.h"
 #include "analyze_tonedetect_F32.h"
@@ -47,6 +61,15 @@
 #include "AudioAnalyzePhase_F32.h"
 #include "AudioFilterEqualizer_F32.h"
 #include "AudioFilterFIRGeneral_F32.h"
+#include "radioCESSBtransmit_F32.h"
+#include "radioCESSB_Z_transmit_F32.h"
+#include "radioVoiceClipper_F32.h"
 #include "RadioFMDetector_F32.h"
+#include "radioBFSKmodulator_F32.h"
+#include "radioFT8Modulator_F32.h"
+#include "radioFT8Demodulator_F32.h"
+#include "RadioFMDiscriminator_F32.h"
 #include "radioNoiseBlanker_F32.h"
 #include "synth_sin_cos_f32.h"
+#include "UART_F32.h"
+// #include "USB_Audio_F32.h" Include this separately if needed. Then in IDE Tools>USB Type>Audio

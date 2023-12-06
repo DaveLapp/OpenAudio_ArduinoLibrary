@@ -1,12 +1,12 @@
 /*
  * RadioFMDetector_F32.cpp
  *
- * 22 March 2020
+ * 25 April 2022
  * Bob Larkin, in support of the library:
  * Chip Audette, OpenAudio, Apr 2017
  *     -------------------
  *
- * Copyright (c) 2020 Bob Larkin
+ * Copyright (c) 2022 Bob Larkin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,15 +57,9 @@ void RadioFMDetector_F32::update(void) {
      return;
      }
 
-  // If there's no coefficient table, give up.
-  if (fir_IQ_Coeffs == NULL) {
-    if(errorPrintFM)  Serial.println("FMDET-ERR: No IQ FIR Coefficients");
-    AudioStream_F32::release(blockIn);
-    return;
-    }
 
   if (fir_Out_Coeffs == NULL) {
-    if(errorPrintFM)  Serial.println("FMDET-ERR: No Out FIR Coefficients");
+    //if(errorPrintFM)  Serial.println("FMDET-ERR: No Out FIR Coefficients");
     AudioStream_F32::release(blockIn);
     return;
     }
@@ -73,7 +67,7 @@ void RadioFMDetector_F32::update(void) {
   // Try to get a block for the FM output
   blockOut = AudioStream_F32::allocate_f32();
   if (!blockOut){      // Didn't have any
-    if(errorPrintFM)  Serial.println("FMDET-ERR: No Output Memory");
+    //if(errorPrintFM)  Serial.println("FMDET-ERR: No Output Memory");
     AudioStream_F32::release(blockIn);
     return;
     }

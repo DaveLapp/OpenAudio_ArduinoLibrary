@@ -7,6 +7,11 @@ audio_block_f32_t	KEYWORD1
 AudioStream_F32		KEYWORD1
 AudioConnection_F32	KEYWORD1
 
+AudioAlignLR_F32	KEYWORD1
+TPinfo			KEYWORD2
+stateAlignLR	KEYWORD2
+setThreshold	KEYWORD2
+
 AudioAnalyzeFFT256_IQ_F32	KEYWORD1
 windowFunction	KEYWORD2
 getData	KEYWORD2
@@ -19,6 +24,7 @@ setXAxis	KEYWORD2
 AudioAnalyzeFFT1024_F32	KEYWORD1
 AudioAnalyzeFFT2048_F32	KEYWORD1
 AudioAnalyzeFFT4096_F32	KEYWORD1
+AudioAnalyzeFFT4096_IQEM_F32	KEYWORD1
 
 AudioAnalyzePeak_F32 KEYWORD1
 readPeakToPeak	KEYWORD2
@@ -108,6 +114,11 @@ setHighpass	KEYWORD2
 setBandpass	KEYWORD2
 setNotch	KEYWORD2
 
+AudioFilterConvolution_F32	KEYWORD1
+passThrough	KEYWORD2
+initFilter	KEYWORD2
+getCoeffPtr	KEYWORD2
+
 AudioFilterFIR_F32	KEYWORD1
 setSampleRate_Hz	KEYWORD2
 setBlockLength		KEYWORD2
@@ -115,6 +126,11 @@ setBlockLength		KEYWORD2
 AudioEffectIIR_F32	KEYWORD1
 AudioEffectCompressor_F32	KEYWORD1
 AudioInputI2S_F32	KEYWORD1
+
+AudioLMSDenoiseNotch_F32 KEYWORD1
+initializeLMS		KEYWORD2
+
+
 AudioMemory_F32		KEYWORD1
 AudioMemoryUsage_F32	KEYWORD1
 AudioMemoryUsageMax_F32	KEYWORD1

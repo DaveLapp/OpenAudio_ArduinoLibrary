@@ -1,9 +1,13 @@
 /*
  * analyze_tonedetect_F32.h  Converted to float from PJRC Teensy Audio Library
+ * for the OpenAudio_TeensyArduino library (floating point audio).
  *   MIT License on changed portions
  *   Bob Larkin March 2021
  *
- *   Audio Library for Teensy 3.X
+ * See also  analyze_CTCSS_F32  that is specific for the CTCSS tone system
+ * with tones in the 67.0 to 250.3 Hz range.  (In this same library)
+ *
+ * Originally from:  Audio Library for Teensy 3.X
  * Copyright (c) 2014, Paul Stoffregen, paul@pjrc.com
  *
  * Development of this audio library was funded by PJRC.COM, LLC by sales of
@@ -28,6 +32,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ // Added setGain(gain) March 2023  Bob L
 
 #ifndef analyze_tonedetect_F32_h_
 #define analyze_tonedetect_F32_h_
@@ -59,6 +64,10 @@ public:
            //(uint16_t)( ( (float)sample_rate_Hz/freq*(float)cycles) + 0.5f) );
         }
 
+    void setGain(float _gain) {
+        gain = _gain;
+        }
+
     bool available(void) {
         __disable_irq();
         bool flag = new_output;
@@ -87,6 +96,7 @@ private:
     float s1, s2;            // Goertzel algorithm state
     float out1, out2;        // Goertzel algorithm state output
     float power;
+    float gain = 1.0f;       // Voltage gain, added Mar 2023
     uint16_t length;         // number of samples to analyze
     uint16_t count;          // how many left to analyze
     uint16_t ncycles;        // number of waveform cycles to seek
